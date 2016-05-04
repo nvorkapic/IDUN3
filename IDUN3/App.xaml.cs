@@ -1,5 +1,7 @@
-﻿using System;
+﻿using IDUN3.ConfigurationPages;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,6 +24,26 @@ namespace IDUN3
     /// </summary>
     sealed partial class App : Application
     {
+        public ObservableCollection<DisplayOption> DisplayOptionsList = new ObservableCollection<DisplayOption>();
+        public ObservableCollection<Configuration> MeasurementConfiguration = new ObservableCollection<Configuration>();
+
+        public class DisplayOption
+        {
+            public string Title { get; set; }
+            public string Enabled { get; set; }
+            public Type ClassType { get; set; }
+
+            public override string ToString()
+            {
+                return Title;
+            }
+        }
+
+        public bool doInit;
+        public bool doConfig;
+
+
+        
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -30,6 +52,14 @@ namespace IDUN3
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            MeasurementConfiguration.Add(new Configuration { Measurement = "Usage", Report=1, Interval=1000 });
+            MeasurementConfiguration.Add(new Configuration { Measurement = "Temperature", Report = 1, Interval = 1000 });
+            MeasurementConfiguration.Add(new Configuration { Measurement = "Pressure", Report = 1, Interval = 1000 });
+            MeasurementConfiguration.Add(new Configuration { Measurement = "Humidity", Report = 1, Interval = 1000 });
+            MeasurementConfiguration.Add(new Configuration { Measurement = "Magnetometer", Report = 1, Interval = 1000 });
+            MeasurementConfiguration.Add(new Configuration { Measurement = "Accelerometer", Report = 1, Interval = 1000 });
+            MeasurementConfiguration.Add(new Configuration { Measurement = "Gyroscope", Report = 1, Interval = 1000 });
         }
 
         /// <summary>

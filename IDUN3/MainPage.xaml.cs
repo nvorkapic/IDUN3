@@ -32,7 +32,15 @@ namespace IDUN3
             {
                 (Application.Current as IDUN3.App).DisplayOptionsList.Add(new DisplayOption { Title = "Initialization", ClassType = typeof(InitPage) });
             }
-             
+
+            (Application.Current as IDUN3.App).DisplayOptionsList.CollectionChanged += DisplayOptionsList_CollectionChanged;
+
+
+        }
+
+        private void DisplayOptionsList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DisplayListBox.SelectedIndex = 0;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
